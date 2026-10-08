@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;0,600;1,500;1,600&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>Premium Ad Reward System</title>
+    <script src='//libtl.com/sdk.js' data-zone='10144078' data-sdk='show_10144078'></script>
+    <style>
+        :root {
+            --void: #0a0b0d;
+            --panel: #14161a;
+            --panel-raised: #1a1d22;
+            --hairline: rgba(201, 168, 118, 0.16);
+            --hairline-strong: rgba(201, 168, 118, 0.32);
+            --gold: #c9a876;
+            --gold-bright: #e8d4a0;
+            --gold-deep: #9c7d4f;
+            --emerald: #1f8a5f;
+            --emerald-bright: #2eb37d;
+            --ivory: #f0ede4;
+            --muted: #9c9a90;
+            --danger-muted: #a66b5c;
+            --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
+            --font-body: 'Manrope', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: var(--font-body);
+        }
+
+        body {
+            background: radial-gradient(ellipse at top, #15181c 0%, var(--void) 55%);
+            color: var(--ivory);
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(circle at 15% 15%, rgba(201, 168, 118, 0.06) 0%, transparent 35%),
+                radial-gradient(circle at 85% 85%, rgba(31, 138, 95, 0.08) 0%, transparent 35%);
+            z-index: -1;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 500px;
+            background: var(--panel);
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow:
+                0 1px 0 rgba(255, 255, 255, 0.04) inset,
+                0 20px 50px rgba(0, 0, 0, 0.55);
+            position: relative;
+            border: 1px solid var(--hairline);
+        }
+
+        .header {
+            background: linear-gradient(180deg, #16191d 0%, #0e1012 100%);
+            padding: 32px 20px 26px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 1px solid var(--hairline);
+        }
+
+        .header::after {
+            content: '';
+            position: absolute;
+            top: -60%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 260px;
+            height: 260px;
+            background: radial-gradient(circle, rgba(201, 168, 118, 0.18) 0%, transparent 70%);
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .header h1 {
+            font-family: var(--font-display);
+            font-size: 26px;
+            font-weight: 600;
+            font-style: italic;
+            letter-spacing: 0.3px;
+            color: var(--gold-bright);
+            position: relative;
+            z-index: 2;
+        }
+
+        .developer {
+            display: inline-block;
+            background: transparent;
+            border: 1px solid var(--hairline);
+            padding: 5px 16px;
+            border-radius: 20px;
+            font-size: 11px;
+            color: var(--muted);
+            margin-top: 14px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            position: relative;
+            z-index: 2;
+        }
+
+        .developer:hover {
+            border-color: var(--hairline-strong);
+            color: var(--gold-bright);
+            transform: translateY(-1px);
+        }
+
+        .content {
+            padding: 26px;
+        }
+
+        .user-info {
+            background: var(--panel-raised);
+            border-radius: 14px;
+            padding: 16px;
+            margin-bottom: 20px;
+            text-align: center;
+            border: 1px solid var(--hairline);
+            position: relative;
+        }
+
+        .user-info p {
+            margin: 5px 0;
+            font-size: 14px;
+            color: var(--muted);
+        }
+
+        .user-info p span {
+            color: var(--ivory);
+            font-weight: 500;
+        }
+
+        .user-badge {
+            position: absolute;
+            top: -11px;
+            right: 15px;
+            background: linear-gradient(135deg, var(--gold-bright), var(--gold-deep));
+            color: #1a1406;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.6px;
+            box-shadow: 0 4px 10px rgba(201, 168, 118, 0.25);
+        }
+
+        .stats {
+            display: flex;
+            gap: 12px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .stat-card {
+            flex: 1;
+            background: var(--panel-raised);
+            border-radius: 14px;
+            padding: 16px 10px;
+            border: 1px solid var(--hairline);
+            position: relative;
+        }
+
+        .stat-card h3 {
+            font-size: 11px;
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: var(--muted);
+            letter-spacing: 0.3px;
+        }
+
+        .stat-card .value {
+            font-family: var(--font-display);
+            font-size: 26px;
+            font-weight: 600;
+            color: var(--gold-bright);
+        }
+
+        .progress-container {
+            margin: 25px 0;
+            text-align: center;
+        }
+
+        .progress-label {
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            color: var(--muted);
+        }
+
+        .progress-label span:last-child {
+            color: var(--emerald-bright);
+            font-weight: 600;
+        }
+
+        .progress-bar {
+            height: 6px;
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--emerald), var(--gold));
+            border-radius: 10px;
+            width: 30%;
+            transition: width 0.5s ease;
+        }
+
+        .buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin: 25px 0;
+        }
+
+        .btn-3d {
+            position: relative;
+            padding: 15px 20px;
+            border: 1px solid transparent;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            color: var(--void);
+            text-align: center;
+            transition: all 0.2s ease;
+            background: linear-gradient(135deg, var(--emerald-bright), var(--emerald));
+            box-shadow: 0 10px 24px rgba(31, 138, 95, 0.25);
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btn-3d:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 14px 28px rgba(31, 138, 95, 0.35);
+        }
+
+        .btn-3d:active {
+            transform: translateY(0);
+            box-shadow: 0 6px 14px rgba(31, 138, 95, 0.25);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--gold-bright);
+            border: 1px solid var(--hairline-strong);
+            box-shadow: none;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(201, 168, 118, 0.08);
+            box-shadow: 0 8px 20px rgba(201, 168, 118, 0.12);
+        }
+
+        #stop-auto-btn {
+            background: transparent;
+            color: var(--muted);
+            border: 1px solid var(--hairline);
+            box-shadow: none;
+        }
+
+        #stop-auto-btn:hover {
+            color: var(--danger-muted);
+            border-color: var(--danger-muted);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(166, 107, 92, 0.15);
+        }
+
+        button:focus-visible, .developer:focus-visible {
+            outline: 2px solid var(--gold-bright);
+            outline-offset: 2px;
+        }
+
+        .ad-container {
+            background: rgba(0, 0, 0, 0.25);
+            border-radius: 14px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+            border: 1px solid var(--hairline);
+        }
+
+        .ad-label {
+            font-size: 10px;
+            letter-spacing: 1px;
+            color: var(--gold-deep);
+            margin-bottom: 12px;
+        }
+
+        /* Animation for ad watching */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.06); color: var(--emerald-bright); }
+            100% { transform: scale(1); }
+        }
+
+        .pulse {
+            animation: pulse 0.5s ease;
+        }
+
+        .ad-notification {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(14, 16, 18, 0.95);
+            color: var(--ivory);
+            padding: 14px 26px;
+            border-radius: 10px;
+            border: 1px solid var(--hairline-strong);
+            z-index: 1000;
+            display: none;
+            font-weight: 500;
+            font-size: 14px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            backdrop-filter: blur(8px);
+        }
+
+        .footer {
+            text-align: center;
+            padding: 18px;
+            color: var(--muted);
+            font-size: 11px;
+            border-top: 1px solid var(--hairline);
+        }
+
+        .firebase-logo {
+            display: inline-block;
+            margin-top: 10px;
+            font-size: 10px;
+            letter-spacing: 0.4px;
+            color: var(--gold-deep);
+            border: 1px solid var(--hairline);
+            padding: 4px 10px;
+            border-radius: 20px;
+        }
+
+        /* Responsive design */
+        @media (max-width: 480px) {
+            .container {
+                border-radius: 14px;
+            }
+
+            .header {
+                padding: 26px 16px 22px;
+            }
+
+            .content {
+                padding: 20px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="ad-notification" id="ad-notification">Ad completed! +0.50 points added to your account</div>
+    
+    <div class="container">
+        <div class="header">
+            <h1>Premium Ad Reward System</h1>
+            <div class="developer" onclick="window.location.href='https://t.me/TGJOOBBOTOWNER'">Developer by Anonymous 😔</div>
+        </div>
+        
+        <div class="content">
+            <div class="user-info">
+                <div class="user-badge">VIP USER</div>
+                <p>Welcome, <span id="user-name">User123</span></p>
+                <p>User ID: <span id="user-id">#USR-7694</span></p>
+            </div>
+            
+            <div class="stats">
+                <div class="stat-card">
+                    <h3>Watched Ads</h3>
+                    <div class="value" id="watched-ads">18</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Earned Points</h3>
+                    <div class="value" id="earned-points">9.00</div>
+                </div>
+            </div>
+            
+            <div class="progress-container">
+                <div class="progress-label">
+                    <span>Progress to Bonus</span>
+                    <span id="ads-progress">30%</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-fill"></div>
+                </div>
+            </div>
+            
+            <div class="ad-container">
+                <div class="ad-label">MONETAG INTERSTITIAL AD</div>
+                <div class="buttons">
+                    <button class="btn-3d" id="watch-ad-btn" onclick="watchAd()">Watch Ad (+0.50)</button>
+                    <button class="btn-3d btn-secondary" id="auto-ad-btn" onclick="startAutoAds()">Auto Show Ads</button>
+                    <button class="btn-3d" id="stop-auto-btn" onclick="stopAutoAds()">Stop Auto Ads</button>
+                </div>
+            </div>
+        </div>
+            
+        <div class="footer">
+            <p>Secured by Firebase • All transactions are protected</p>
+            <div class="firebase-logo">Firebase</div>
+        </div>
+    </div>
+
+    <script>
+        // Constants
+        const POINTS_PER_AD = 0.50;
+        const ADS_FOR_BONUS = 10;
+        
+        // State variables
+        let watchedAdsCount = 0;
+        let earnedPoints = 0;
+        let autoAdInterval;
+        let userId = null;
+        
+        // DOM Elements
+        const watchedAdsEl = document.getElementById('watched-ads');
+        const earnedPointsEl = document.getElementById('earned-points');
+        const adsProgressEl = document.getElementById('ads-progress');
+        const progressFillEl = document.getElementById('progress-fill');
+        const adNotificationEl = document.getElementById('ad-notification');
+        
+        // Initialize the app
+        function initApp() {
+            // Load user data
+            if (localStorage.getItem('watchedAdsCount')) {
+                watchedAdsCount = parseInt(localStorage.getItem('watchedAdsCount'));
+                earnedPoints = parseFloat(localStorage.getItem('earnedPoints'));
+            }
+            
+            // Generate user ID if not exists
+            if (!localStorage.getItem('userId')) {
+                const newUserId = 'USR-' + Math.floor(10000 + Math.random() * 90000);
+                localStorage.setItem('userId', newUserId);
+            }
+            
+            userId = localStorage.getItem('userId');
+            document.getElementById('user-id').textContent = `#${userId}`;
+            document.getElementById('user-name').textContent = `User${Math.floor(1000 + Math.random() * 9000)}`;
+            
+            updateUI();
+        }
+        
+        // Update UI elements
+        function updateUI() {
+            watchedAdsEl.textContent = watchedAdsCount;
+            earnedPointsEl.textContent = earnedPoints.toFixed(2);
+            
+            const progress = (watchedAdsCount % ADS_FOR_BONUS) / ADS_FOR_BONUS * 100;
+            adsProgressEl.textContent = `${Math.round(progress)}%`;
+            progressFillEl.style.width = `${progress}%`;
+            
+            // Add animation when points change
+            earnedPointsEl.classList.remove('pulse');
+            void earnedPointsEl.offsetWidth; // Trigger reflow
+            earnedPointsEl.classList.add('pulse');
+        }
+        
+        // Watch ad function using Monetag
+        function watchAd() {
+            // Show ad notification
+            showAdNotification("Loading ad... Please wait");
+            
+            // Show Monetag ad
+            if (typeof show_10144078 === 'function') {
+                show_10144078().then(() => {
+                    // Ad shown successfully
+                    watchedAdsCount++;
+                    earnedPoints += POINTS_PER_AD;
+                    
+                    // Every 10 ads, give bonus points
+                    if (watchedAdsCount % ADS_FOR_BONUS === 0) {
+                        earnedPoints += 1.00; // Bonus point
+                    }
+                    
+                    // Save data
+                    localStorage.setItem('watchedAdsCount', watchedAdsCount);
+                    localStorage.setItem('earnedPoints', earnedPoints);
+                    
+                    updateUI();
+                    
+                    // Show success notification
+                    showAdNotification("Ad completed! +0.50 points added to your account");
+                }).catch(error => {
+                    console.error("Ad error:", error);
+                    showAdNotification("Failed to show ad. Please try again.");
+                });
+            } else {
+                // Fallback to simulated ad
+                setTimeout(() => {
+                    watchedAdsCount++;
+                    earnedPoints += POINTS_PER_AD;
+                    
+                    // Every 10 ads, give bonus points
+                    if (watchedAdsCount % ADS_FOR_BONUS === 0) {
+                        earnedPoints += 1.00; // Bonus point
+                    }
+                    
+                    // Save data
+                    localStorage.setItem('watchedAdsCount', watchedAdsCount);
+                    localStorage.setItem('earnedPoints', earnedPoints);
+                    
+                    updateUI();
+                    
+                    // Show success notification
+                    showAdNotification("Ad completed! +0.50 points added to your account");
+                }, 2000);
+            }
+        }
+        
+        // Auto show ads
+        function startAutoAds() {
+            autoAdInterval = setInterval(watchAd, 30000); // Auto show ad every 30 seconds
+            document.getElementById('auto-ad-btn').textContent = "Auto Ads Running...";
+            showAdNotification("Auto ads started. Ads will play every 30 seconds.");
+        }
+        
+        function stopAutoAds() {
+            clearInterval(autoAdInterval);
+            document.getElementById('auto-ad-btn').textContent = "Auto Show Ads";
+            showAdNotification("Auto ads stopped.");
+        }
+        
+        // Show ad notification
+        function showAdNotification(message) {
+            adNotificationEl.textContent = message;
+            adNotificationEl.style.display = 'block';
+            
+            setTimeout(() => {
+                adNotificationEl.style.display = 'none';
+            }, 3000);
+        }
+        
+        // Initialize app on load
+        window.onload = initApp;
+    </script>
+</body>
+</html>
